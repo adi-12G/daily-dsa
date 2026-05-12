@@ -7,28 +7,31 @@ public:
         sort(nums.begin(), nums.end());
 
         set<vector<int>> st;
+        for(int i = 0; i<n; i++){
+            int current = nums[i];
+            int left = i+1;
+            int right = n - 1;
+            while(left<right){
+                  int sum = current + nums[left] + nums[right];
+                if(sum == 0){
+                   vector<int> temp = {current, nums[left], nums[right]};
+                   st.insert(temp);
 
-        for(int i = 0; i < n; i++) {
-
-            int first = nums[i];
-
-            for(int j = i + 1; j < n; j++) {
-
-                int second = nums[j];
-
-                for(int k = j + 1; k < n; k++) {
-
-                    int third = nums[k];
-
-                    if(first + second + third == 0) {
-
-                        vector<int> temp = {first, second, third};
-
-                        st.insert(temp);
-                    }
+                   left++;
+                   right--;
                 }
+                else if(sum > 0){
+             right--;
+             }
+
+               else{
+               left++;
+                }
+                
             }
         }
+
+        
 
         vector<vector<int>> ans(st.begin(), st.end());
 
